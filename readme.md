@@ -1,27 +1,23 @@
-
 The following is a fast overview of how to install campaign.
 Here is a index of what this file contents:
 
 +A) REQUERIMENTS
 +B) INSTALL
-  1) extract files (you have done this one)
-  2) Create a database, a user for that database.   
-  3) Palce files as described in "Notes on Folder organization"
+  1) Clone this repository
+  2) Create a database (mysql), a user for that database.   
+  3) Place files as described in "Notes on Folder organization"
   4) Edit "config.pl" and "config.php" to match DB name, DB user and DB user password
-  5) Load index.html and chech several pages, initialize maps etc etc
-  + extra coments, todo list, more templates info, etc
+  5) Load index.html and chech several pages, initialize maps
 +C) NOTES
     1) Notes on Windows server
     2) Notes on Folder organization and Files description.
     3) Notes on Logfiles
     4) Notes about lockfiles.
     5) Notes about counters and datafiles.
-    6) Notes on capmaign datafiles and Templates.
-    7) Notes on Authcodes
-    8) Notes on mission creation.
-    9) Notes on images.  
-   10) Notes on Emoticons
-   11) Notes on javascript
+    6) Notes on Authcodes
+    7) Notes on mission creation.
+    8) Notes on images.
+    9) Notes on javascript
 +D) CREDITS
 +E) LICENSE
 
@@ -32,8 +28,8 @@ Here is a index of what this file contents:
 
    Apache : version 1.3.x or new
    PHP    : version 4.x or new
-   MySQL  : version 4.x or new   (maybe 3.x, buy not tested)
-   Perl   : version 5.8.x or new (maybe 5.6.x, buy not tested)
+   MySQL  : version 4.x or new   (maybe 3.x, but not tested)
+   Perl   : version 5.8.x or new (maybe 5.6.x, but not tested)
    cjpeg  : As part of jpeg-6b
    OS	  : Unix, Linux  - NOT tested on Windows servers. See "Notes on Windows server".
    Optional gnuplot: 3.7 +
@@ -53,7 +49,7 @@ Here is a index of what this file contents:
 # B - INSTALL
 #---------------------------------------------------------------------------------
 
-1. Extract files into some temporary place. (this is the -1 step, because you have done :)
+1. Clone this repository into a temporary place
 
 2. Create a database, a user for that database. Table definitions are in a file called
    "new_tables.sql". Create the tables with a command like: 
@@ -62,7 +58,7 @@ Here is a index of what this file contents:
    "votes_tbl.sql"
    "badc_6_HL_slots.sql"
 
-Example how to create datanases from shell ($ is shell prompt)
+Example how to create databases from shell ($ is shell prompt)
 
 $ mysql --user=root -pYOUR_MYSQL_ROOT_PASSWORD
 
@@ -76,7 +72,7 @@ $ mysql badc --user=lucy -psome_passwd < new_tables.sql
 $ mysql badc --user=lucy -psome_passwd < votes_tbl.sql
 $ mysql badc --user=lucy -psome_passwd < badc_6_HL_slots.sql
 
-If you do not have shell access  just use some software like phpMyAdmin
+If you do not have shell access just use some software like phpMyAdmin
 
    **WARINIG**: any older tables from a running campaing will be droped!! This is to create
    new tables only, for first time, or to reset all to 0. Pilot data, squadrons stats, all
@@ -89,16 +85,16 @@ If you do not have shell access  just use some software like phpMyAdmin
 
 
 4. Edit "config.pl" and "config.php" to match DB name, DB user and DB user password,
-   folder paths, program patha and other values. There is a description on each value
+   folder paths, program path and other values. There is a description on each value
    inside config.pl file. 
 
-   Edit other mission requeriments, like amount of total human players, amount pf players
-   per side,  amount of missions per virtual day, dyaly AF and city damage recover, damage
+   Edit other mission requeriments, like amount of total human players, amount of players
+   per side,  amount of missions per virtual day, dayly AF and city damage recover, damage
    to AF per each pilot killed and for each plane lost, etc...
 
 5. Load index.html and use you browser to check if all works ok. 
 
-   Note!! : Remmeber to set correct perl path on all .pl files
+   Note!! : Remember to set correct perl path on all .pl files
 
    Note!! : Make sure scripts are in correct newline format (used dos2unix util if need)
             If you get script error can be because incorrect newlines translations
@@ -119,7 +115,7 @@ If you do not have shell access  just use some software like phpMyAdmin
 
    Customize your web site. Please do NOT use "Bellum" as campaign name. Bellum is the
    first campaign runnin with this "BADC" (bourne again dinamic campaign). Set you desired
-   campaign name, change the rules as you like, customize languages, change soruces to
+   campaign name, change the rules as you like, customize languages, change sources to
    introduce new fertures, build your style pages, and any customization you like.
 
    
@@ -134,24 +130,12 @@ If you do not have shell access  just use some software like phpMyAdmin
    When a map is over, go to config.pl, change config to use a new map, the go to
    ref_map.html and run all 3 scripts to make map, front and suply images.
 
-   In the DOCS foleder you have a dump of FAQ and manual add ons from bellum forum.
+   In the DOCS folder you have a dump of FAQ and manual add ons from bellum forum.
    understanting on how campaing works will help understand the code too.
 
    The MAP_DATAS folder contains original data files. In case you like to restart a map,
    here they are. Some of Those data files when are placed on CGI-BIN folder are changed
    as campaigns run.
-
-   I will release more campaing data files (and tempaltes) in future. Also, i will write
-   in future intructions on how to build those templates. You can fins some information
-   about templates on Bellum forum, Forum "desarrollo", at http://il2fb-bellum.com.ar
-
-   Know-Bugs: NaN... err many many:)
-   Unknown-Bugs: the double of the Known ones :)
-
-   TO-DO list:  is to big to place here, all times we disccus about adding feratures on 
-   forums. check here: http://il2fb-bellum.com.ar/foro/
-
-
 
 # C- NOTES
 #---------------------------------------------------------------------------------
@@ -163,7 +147,7 @@ If you do not have shell access  just use some software like phpMyAdmin
    IndigoPerl +MySQL. Scripts works ok. But i didnt strong tested all programs. The only
    modification needed is the path to perl on the first line of ALL .pl files:
 
-       If perl is on your path  this will work:
+       If perl is on your path this will work:
            #!perl
        If not, place complete path to perl:
           #!C:\path_to_perl\perl
@@ -173,58 +157,51 @@ If you do not have shell access  just use some software like phpMyAdmin
 
 You can get Mysql for windows here: http://dev.mysql.com/downloads/
 
-Indigo perl offers a complete package for windows: Perl 5.8 + Apache 2.x + php 4.x, works
-very nice and instalation of all programs are very easy. http://www.indigostar.com/indigoperl.htm
-Packages can be easy added using IPM (indigo packa manager). just run on a windows console
-ipm. you will get a prompt IPM> and run 
-IPM> install DBI
-IPM> install DBD::mysql
-You are done.
+Perl for windows https://www.perl.org/get.html
 
 cjpeg for windows aviable here : http://gnuwin32.sourceforge.net/packages/jpeg.htm
-gnuplot for windows: Unknow 
+gnuplot for windows: http://www.gnuplot.info/
+
 config.pl looks different for windows server because windows uses backslash as folder
 limiters, so an extra backslash is need to escape. Make sure paths do NOT contains spaces.
 If they do, you have to add escaped quotes. Take a look into config_windows.pl examples.
 
-
-
 2) Notes on Folder organization and Files description.
 
- There are some folder that are mandatory, becasue there is no option on config.in to
- change them. It is possible to dom but you gave to manually change all script ann php
+ There are some folder that are mandatory, becasue there is no option on config to
+ change them. It is possible to do but you have to manually change all script and php
  files, or better, set them as variables and later place them on config.* files
  The mandatory folders layout are:
 
 Home                      
 \---public_html          Web root (html, php, css and other files)
-    |---gen              generated data files (control files, mis, proerties)
+    |---gen              generated data files (control files, mis, properties)
     |---images           general images dir
-    |---rep              html reports, reported missins zip files and eventlogs
+    |---rep              html reports, reported missions zip files and eventlogs
     \---tmp              temporary place for mission download
 
 Aditionally you can set up custom place for:
-cgi-bin folder   :    to hold scriptas and campaing datafiles
+cgi-bin folder   :    to hold scripts and campaing datafiles
 a temp folder    :    for mission upload and some other cgi temporary data (plot[123].pl) uses a temp folder.
-data-bkup folder :    to hold backup data
+data-backup folder :    to hold backup data
 
 This is the layout i use:
 
 Home                      
 \---public_html          Web root (html, php and other files)
     |---cgi-bin          CgiExec dir (most perl and data files)
-    |   |---data_bkup    bakups for data before reporting a mission
+    |   |---data_bkup    backups for data before reporting a mission
     |   \---tmp          temp dir for cgi plots data files and upload missions
-    |---gen              generated data files (control files, mis, proerties)
+    |---gen              generated data files (control files, mis, properties)
     |---images           general images dir
     |---rep              html reports, reported missins zip files and eventlogs
     \---tmp              temporary place for mission download
 
-And also tested this layout under Windows+apache+indigoperl+php:
+Another layout:
 
 Home                      
 |---public_html          Web root (html, php and other files)
-|   |---gen              generated data files (control files, mis, proerties)
+|   |---gen              generated data files (control files, mis, properties)
 |   |---images           general images dir
 |   |---rep              html reports, reported missins zip files and eventlogs
 |   \---tmp              temporary place for mission download
@@ -235,69 +212,67 @@ Home
 
 
 GENERAL HTML/PHP FILES
-index.html               Main index page
-manual.html              Manual page
-news.html                Archived news page
+index.html     Main index page
+manual.html    Manual page
+news.html      Archived news page
 points.html		 Information on Points system
-tasks.html		 Information about taks 
+tasks.html		 Information about tasks 
 under.html		 Simple "under construction page"
-block.php                blocks unknow user agents
+block.php      blocks unknow user agents
 
 REGISTER RELATED HTML/PHP FILES
-registro.html		 Main register menu
-pilot_reg.html		 Pilot registration
-join_sqd.php		 Pilot join a squadron
-leave_squadron.php	 Pilot leave squadron	
-delete_pilot.php	 Pilot delete from database
-sqd_reg.html		 Squadron registration
-sqd_admin.php		 Squad admin, step 1
-sqd_admin2.php		 Squad admin, step 2
+registro.html		    Main register menu
+pilot_reg.html		  Pilot registration
+join_sqd.php		    Pilot join a squadron
+leave_squadron.php	Pilot leave squadron	
+delete_pilot.php	  Pilot delete from database
+sqd_reg.html		    Squadron registration
+sqd_admin.php		    Squad admin, step 1
+sqd_admin2.php	  	Squad admin, step 2
 ** NOTE: some register scripts are in perl, direct link to them. 
 
 STATS RELATED HTML/PHP FILES
 all_pilots.php		Show all pilots stats
 alive_pilots.php	Shows alive pilots stats
-all_sqds.php		Shows squadrons stats
-sqd_file.php		Specific squadron roster/stats
-pilot.php		Specific pilot stats
+all_sqds.php		  Shows squadrons stats
+sqd_file.php		  Specific squadron roster/stats
+pilot.php		      Specific pilot stats
 show_akills.php		Specific pilot airkills
 show_gkills.php		Specific pilot groundkills
 show_rescues.php	Specific pilot rescues
 
 MISSION RELATED HTML/PHP FILES
-create.php		Creation page, mission in progres and today missions
-last_mis.php		Last missions of today and links to previous days
+create.php		    Creation page, mission in progres and today missions
+last_mis.php		  Last missions of today and links to previous days
 mis_download.php	Download confirmation page
-take_slot.php		Used to take a host or plannig slot on create.php
+take_slot.php		  Used to take a host or plannig slot on create.php
 rep_input.html		Page to report (upload) a missions, a simple form
-mapa.html               Map page  (created by parser, after every report)
-no_click.html           Information about imagemaps are only to find sector/city name
+mapa.html         Map page  (created by parser, after every report)
+no_click.html     Information about imagemaps are only to find sector/city name
 
 INFORMATION HTML/PHP FILES
 find_pilot.php		Find a pilot file
-find_sqd.php		Find a squadron file
+find_sqd.php		  Find a squadron file
 
 ADMIN HTML/PHP FILES     (for super user only, defined in config.pl)
-config.php		 configuration file for PHP
+config.php		           Configuration file for PHP
 ref_map.html             Maintenance pages, to choose one of the 3 next...
 ref_attack_page.html     Rebuild Target places,  map status page.
-ref_front_image.html     remake Frontline imega based on currect fronline status
+ref_front_image.html     remake Frontline imaga based on current fronline status
 ref_suply_image.html     remake sulply image based on current geographic data
-
 
 NOT HTML/PHP FILES
 robots.txt		 Simple robots.txt file
-warn.txt		 Parser warning list
-
+warn.txt		   Parser warning list
 
 PERL SCRIPTS:
 accept_pilot.pl     : accept pilot
-allow_images.pl     : allow display german images with swastica
+allow_images.pl     : allow display german images with historical marks
 badc_gen_1.pl       : BADC generator
 badc_par_1.pl       : BADC parser
 config.pl           : configuration file
 delete_pilot.pl     : delete a pilot
-disallow_images.pl  : disallow display german images with swastica
+disallow_images.pl  : disallow display german images with historical marks
 gen_opts_31.pl      : read user request options and write down for later use by generator
 join_sqd.pl         : join squadron 
 leave_slot.pl       : leave a slot from create.php page
@@ -310,14 +285,12 @@ pilot_reg.pl        : register a pilot
 plo1.pl             : plots virtual lives/sorties
 plo2.pl             : plots airkills/sorties
 plo3.pl             : plots groundkills/sorties
-reject_pilot.pl     : reject a plilot aplication (not allow to join)
+reject_pilot.pl     : reject a pilot aplication (not allow to join)
 sqd_edit.pl         : Edit squadron infromation
 sqd_reg.pl          : Register a squadron
-take_slot.pl        : take a sot from create.php -> take_slot.php -> 
-test.pl		    : test instalation program
+take_slot.pl        : take a slot from create.php -> take_slot.php
+test.pl		          : test instalation program
 write_comm.pl       : write comment on static html reports.
-
-
 
 3) Notes on Logfiles
 
@@ -338,10 +311,10 @@ used_options.txt: holds all combination of request to build a mission.
 4)Notes about lockfiles.
 
 Default locks are _gen.lock and _par.lock
-If this files appears, check logfiles. chack is there is a corrupt mission report (html,Mysql)
-afeer detecting what was problem, (fix htmml, fix mysql, etc) remove files.
+If this files appears, check logfiles. check is there is a corrupt mission report (html,Mysql)
+after detecting what was problem, (fix html, fix mysql, etc) remove files.
 Used also to lock programs on special cases, updating data, server problem, etc. Just
-manually create those files in cgi-bin folder.
+manualy create those files in cgi-bin folder.
 
 
 5)Notes about counters and datafiles.
@@ -349,17 +322,9 @@ manually create those files in cgi-bin folder.
 mis_counter.data : holds mission number, format is underscore plus 5 digits. ex  _000001
 rep_counter.data : holds report number, format is underscore plus 5 digits. ex  _000001
 
+6) Notes on Authcodes
 
-6) Notes on capmaign datafiles and Templates.
-
-This time i will not write much about this. On next releases i will add more information.
-Datafalis are 8 and a image
-
-
-
-7) Notes on Authcodes
-
-Authcodes are there to avid massive squad registration. If you force to get an auth code,
+Authcodes are there to avoid massive squad registration. If you force to get an auth code,
 the interested has to register in forum. Many times people gets tired on register in a new
 forum, and they do not participate because that, so, at least the commander of squadrons
 knows where is the forum, it will be registered on forum , and this helps on participation
@@ -367,28 +332,26 @@ and get involved.
 
 Valid authcodes are just a list on a file (claves.txt). When someone uses a code, it is
 printed into another file (used_claves.txt) with all used authcodes. So validation script
-will look first into claves.txt for a valid code and if it is foun it will look on
+will look first into claves.txt for a valid code and if it is found it will look on
 used_claves.txt file to check if it was used. Since the claves.txt holds many authcodes,
-someone can try to gess one, recomended auth codes are words not in dictionary, like i
-used in bellum :)
+someone can try to gess one, recomended auth codes are words not in dictionary
 
 If you want to disable this, you can edit script to avoid verification, or you can leave a
 single valid code, but stop writing it to used_claves.txt. This way you have a unique code
 (or many) that can be reused.
 
-
-8) Notes on mission creation.
+7) Notes on mission creation.
 
 Mission creation starts on create.php by taking a host slot, then both sides takes request
-slots, making each requests.  Each reques can be done, because take_slot.pl will display
+slots, making each requests. Each request can be done, because take_slot.pl will display
 maps, targets, plane and plane counters to fill. This information is readed from several
 places:
 
--Selectable planes (human and AI) are  listed on config.pl On every map change you  have to
+-Selectable planes (human and AI) are listed on config.pl on every map change you have to
 set new list.
 -Selectable target places are readed from "Options_R.txt" and "Options_B.txt". This 2 files
 are built by parser afer a report. Every time a mission is reported, map front line can
-change, so targets can be or not aviable. Parser make correct selections based on rules in
+change, so targets can be or not avaliable. Parser make correct selections based on rules in
 code.
 -Status data (damage on city, airfields and other info) is readed from a file
 "Status.txt", and like before, this file is created by parser. This file holds information
@@ -398,100 +361,60 @@ This way each side can see a page to select planes, targets and plane numbers. o
 request is submited, data is inserted into database (host_slots_tbl) and specific flight
 data and target is dumped into options.txt
 
-Once both request are done host hits download link: Now generator will serach in database
-(host_slots_tbl) the names and other information. The specifc targets and aircraft options
+Once both request are done host hits download link: Now generator will search in database
+(host_slots_tbl) the names and other information. The specific targets and aircraft options
 are readed from the file "options.txt", if all goes ok, both options are dumped into
-"used_options.txt" mission is created using the numeber of mission from "mis_counter.data"
-host_slots_tbl are cleared, mission is copied to a temporay folder password protected.
+"used_options.txt" mission is created using the number of mission from "mis_counter.data"
+host_slots_tbl are cleared, mission is copied to a temporary folder password protected.
 
 The very first question is why i use database to hold some information, and "options.txt"
 to hold more specific data. Why not use only database?  The answer is because in first
 stages, of development there was not a mission creation page like is now. We have just
 options dumped into a file and the creation page was a simple html reading options from
-"options.txt" file, and not listed on "used_options.txt". When i was deloping new creation
-system i focus on things like army side, a nice grafic interfase, host rights, planning
+"options.txt" file, and not listed on "used_options.txt". When i was developing new creation
+system i focus on things like army side, a nice grafic interface, host rights, planning
 rights and so on. But i never integrated all the request information on database, so i
-just keep using old system with thos 2 files. For sure, will be much better to include all
+just keep using old system with this 2 files. For sure, will be much better to include all
 data into host_slots_tbl DB and forget about those 2 files.
 
-
-
-
-9) Notes on images.  
+8) Notes on images.  
 
 All images i provide are made by me, or generous made by member comunity help on
 development. Some images are used with permission and other images not made by me are
-modifications of images made by other people i used as stating point, then changin shape,
-brightnes, details, aditions deletions. A couple of images are buttons, used to link to
+modifications of images made by other people i used as starting point, then changing shape,
+brightness, details, aditions deletions. A couple of images are buttons, used to link to
 other places, like Hyperlobby website and W3C validator. The emoticons i use on report
-comments in bellum campaing are free aviable to USE (not distribute) from web wiz forums.
+comments in bellum campaing are free avaliable to USE (not distribute) from web wiz forums.
 please read "Notes on Emoticons".
 
-
-Warning on Swastica:
+Warning on Historical Markings:
 
 I have to say that squadrons uses to easy identify which side they fly a medal image. A
-Soviet star for Soviet Air force and a German medal with a swastica for German air
-forece. Also, there is a soviet flag and a nazi flag dispayed close to every name on
+Soviet star for Soviet Air force and a German medal with a Historical Markings for German air
+forces. Also, there is a soviet flag and a german flag displayed close to every name on
 stats, to easy know whisc side a pilot fly. Those images are historic. There is no
 conection with racism or political reasons. However i make that german images are NOT
-dispalyed by default. To see those images, user hast to click on link "allow german
+displayed by default. To see those images, user have to click on link "allow german
 images" this will set a cookie and images will be displayed. You later can click on
-"disallow german images" to vaid them, ot just delete cookies. Because default action is
+"disallow german images" to valid them, or just delete cookies. Because default action is
 not to display them.
 
-
-
-10) Notes on Emoticons
-
-The emoticons i use on report are named as mixx.gif, as said before i use the ones
-provided free of charge by web wiz forums. (http://www.webwizguide.info/web_wiz_forums/)
-Their licence allow to free use of them, but NOT to distribute. So if you like to use them
-just go an download a free copy and use them. Later you edit write_comm.pl to include the
-ones you like. This are the ones i used and how was named: (if you use same names no
-changes need to write_com.pl)
-
-copy smiley1.gif  as mi01.gif
-copy smiley2.gif  as mi02.gif
-copy smiley3.gif  as mi03.gif
-copy smiley4.gif  as mi04.gif
-copy smiley5.gif  as mi05.gif
-copy smiley6.gif  as mi06.gif
-copy smiley7.gif  as mi07.gif
-copy smiley9.gif  as mi08.gif
-copy smiley11.gif as mi09.gif
-copy smiley12.gif as mi10.gif
-copy smiley13.gif as mi11.gif
-copy smiley14.gif as mi12.gif
-copy smiley16.gif as mi13.gif
-copy smiley17.gif as mi14.gif
-copy smiley18.gif as mi15.gif
-copy smiley18.gif as mi16.gif
-copy smiley20.gif as mi17.gif
-copy smiley21.gif as mi18.gif
-copy smiley22.gif as mi19.gif
-copy smiley23.gif as mi20.gif
-copy smiley24.gif as mi21.gif
-copy smiley29.gif as mi22.gif
-copy smiley30.gif as mi23.gif
-copy smiley32.gif as mi24.gif
-
-11) Notes on javascript
+9) Notes on javascript
 
 I use javascript on several places. Most of cases simple checks. But 2 cases need mention:
 
 On takeslot.pl the plane selector form is based on a script original by Vladimir Geshanov
-(http://hotarea.com) called "form select 2D". My code is a strong modification of that
+called "form select 2D". My code is a strong modification of that
 one, and selection is done by regular expression. I can easy remove his credits by
 rewriting shared lines, but i prefer to mention his original work. Because that his name
 and website is printed on every form using this scripts. Nothing to hide. If you plan to
 remove his credit, please rewrite all selectPlane() function. That will be fair. 
 
-Reports has a "Popup information box II" on pints link, so placing the mouse over you get
+Reports has a "Popup information box II" on prints link, so placing the mouse over you get
 a list of all events points related to reach that score. Script is Taked from
 http://www.dynamicdrive.com/dynamicindex5/dhtmltooltip.htm, that is free for use if you
 keep original copyright notice (like i do). But it can NOT be distributed, so i have to
-take out from parser. Also im not writing a repacement, so if you like to have the same
+take out from parser. Also im not writing a replacement, so if you like to have the same
 tool tip just go to dynamicdrive and het any tooltip you like, then change parser to
 generate reports using the javascript of your preference.
 You can find the place on parser (badc_par_1.pl) where the script was located and called:
@@ -513,25 +436,24 @@ to build (just formated text) and mission results very detailled in text format.
 simple things, maybe not important for many other sim programmers, make a wrold of
 difference. http://www.il2sturmovik.com 
 
-Second I will thanks to all makers of online wars previous tu bellum. I start to play
-several online wars and after that,  based on what those proyect offers and what they lack
+Second I will thanks to all makers of online wars previous to bellum. I start to play
+several online wars and after that,  based on what those projects offers and what they lack
 bellum become an idea to offer the best of online wars plus new unique feratures. I cant
 say bellum archived that, but what we have in belllum proved not to be so bad. Special
 thanks for Starshow (VEF1 and VEF2 maker), and to VOW team. I realy know how much time and
-efforts are need to make those proyects. http://www.vef2.net and http://www.vow-hq.com
+efforts are need to make those projects
 
 I have to mention Jiri Fojtasek for his great online lobby. He is creator of HyperLobby,
 where our campaing runs.  http://hyperfighter.jinak.cz
 
 Special thanks to Pirx (88.IAP_Pirx pirx@88-iap.de) for allow use his plane table. All his
-work on colection historic planes usage is exelent. http://www.yogysoft.de/VEFII/pdt.htm
+work on colection historic planes usage is exelent. http://www.yogysoft.de/
 
 Now is time to thanks III/JG52_Meyer, for so many conversations we have speaking about new
 feartures for bellum. Many of the base options we have in bellum are there because he pointed
-to me. With hose ideas bellum started as a proyect and become public on SG1 squadron
-forums. Here i got the suport needed on SG1_Gunkan to this proyect keep moving. You know,
+to me. With those ideas bellum started as a project and become public on SG1 squadron
+forums. Here i got the suport needed on SG1_Gunkan to this project keep moving. You know,
 he saw the light.
-
 
 After that, Bellum was developed in spanish comunity, and here a very important work was
 done by several squadrons, helping me to find bugs, to make new options, making
@@ -539,16 +461,16 @@ sugestions, flying testing and so on. This squadrons i like to say thanks are (i
 alphabetic order): AA, AH, CN, E111, ECV56, ESA, FAE, FK1, HR, III/JG52, RedEye, SG1 and
 StG_111. Some of them with more participation, but at end, all help to develop.
 
-Several persons helpme a lot in particular problems and work (web site, templates, and
+Several persons help me a lot in particular problems and work (web site, templates, and
 other things): AH_Jacketon, HR_Ootoito, HR_Barripower, StG111_Darth_Rye, FK1_Sturmbomber,
 FAE_Almogavar, SG1_Cantos, III/JG52_Orka, FAE_Coyote. Later, when bellum was on final beta
 i got help from not spanish player: RR_OldMan, RC_Shtirlitz, ET=Mitya, LLv26_Mikko,
 LeOs.K_Anak, just to mention by memory. I really apreciate all help for this guys and
-forgiveme if i missed some names, im sure list is incomplete because i got help from many
+forgive me if i missed some names, im sure list is incomplete because i got help from many
 other people.
 
 I have to mention Junior (Luftwaffe 39-45) for give us permission to use images form his
-great website:  http://www.luftwaffe39-45.cjb.net/
+great website
 
 Finally, i apreciate all people flying campaign day by day. thats all
 
@@ -556,12 +478,12 @@ Finally, i apreciate all people flying campaign day by day. thats all
 "IL2" and "IL2 Sturmovik" are trademarks of Ilyushin Aviaton Complex 
 (as stands in IL2-FB game manual, page 63) used with permision by 1C:Maddox. 
 "IL2-Sturmovik Forgotten Battles" is a tardemark of UBI SOFT.
-HyperLobby © 2000-2003 Jiri Fojtasek 
-(c) VEF 2003 Toronto Irkutsk New York  Moscow.  For all questions contact  Starshoy (starshoy@rogers.com)
+HyperLobby 2000-2003 Jiri Fojtasek 
+(c) VEF 2003 Toronto Irkutsk New York  Moscow. For all questions contact Starshoy (starshoy@rogers.com)
 
-Bellum campaign is running under badc (bourne again dynamic campaign) sofware.
-All original content is Copyright © 2003, 2004 by JG10r_Dutertre. All Rights Reserved.
-Other content is Copyright © its respective owners.
+Bellum campaign is running under badc (bourne again dynamic campaign) software.
+All original content is Copyright 2003, 2004 by JG10r_Dutertre. All Rights Reserved.
+Other content is Copyright its respective owners.
 
 
 # E- LICENSE
@@ -608,7 +530,7 @@ agree with this license.
 Case 2) You change sources, customize them, improve them, make bug fixes:
 
     * 2.a) You keep your changes with exactly same Non-copileft licence: Replace
-        "JG10r_Dutertre" with your name or company name on avobe licence and replace
+        "JG10r_Dutertre" with your name or company name on above licence and replace
         software name and version to the name you like different to "BADC 1.0".
 
     * 2.b) You like to make your changes meet GNU licence: Usually this means you will add
@@ -628,5 +550,3 @@ Case 2) You change sources, customize them, improve them, make bug fixes:
         source distributions can reach the original source to include in their proyect. To
         acomplish this just place somewhere on your documentation that your code includes
         Non-copyleft sources, and below that, include the initial licence, printed above.
-
-bye! :)
