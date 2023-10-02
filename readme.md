@@ -2,61 +2,65 @@ The following is a fast overview of how to install campaign.
 Here is a index of what this file contents:
 
 +A) REQUERIMENTS
+
 +B) INSTALL
-  1) Clone this repository
-  2) Create a database (mysql), a user for that database.   
-  3) Place files as described in "Notes on Folder organization"
-  4) Edit "config.pl" and "config.php" to match DB name, DB user and DB user password
-  5) Load index.html and chech several pages, initialize maps
+1) Clone this repository
+2) Create a database (mysql), a user for that database.   
+3) Place files as described in "Notes on Folder organization"
+4) Edit "config.pl" and "config.php" to match DB name, DB user and DB user password
+5) Load index.html and chech several pages, initialize maps
+
 +C) NOTES
-    1) Notes on Windows server
-    2) Notes on Folder organization and Files description.
-    3) Notes on Logfiles
-    4) Notes about lockfiles.
-    5) Notes about counters and datafiles.
-    6) Notes on Authcodes
-    7) Notes on mission creation.
-    8) Notes on images.
-    9) Notes on javascript
+1) Notes on Windows server
+2) Notes on Folder organization and Files description.
+3) Notes on Logfiles
+4) Notes about lockfiles.
+5) Notes about counters and datafiles.
+6) Notes on Authcodes
+7) Notes on mission creation.
+8) Notes on images.
+9) Notes on javascript
+
 +D) CREDITS
+
 +E) LICENSE
 
 
 # A - REQUERIMENTS
-#---------------------------------------------------------------------------------
-   What you need:
 
-   Apache : version 1.3.x or new
-   PHP    : version 4.x or new
-   MySQL  : version 4.x or new   (maybe 3.x, but not tested)
-   Perl   : version 5.8.x or new (maybe 5.6.x, but not tested)
-   cjpeg  : As part of jpeg-6b
-   OS	  : Unix, Linux  - NOT tested on Windows servers. See "Notes on Windows server".
-   Optional gnuplot: 3.7 +
+What you need:
 
-   Notes: 
-  
-   Be sure to have set on httpd.conf one of this options: "AllowOverride All" or
-   "AllowOverride AuthConfig" so Apache can read .htaccess files to restrict access to
-   certain folders. Also, you may need to set apache to know that .pl files are CGI
-   scripts.  It can be done with "AddHandler cgi-script .pl" on a .htacces file.
+Apache : version 1.3.x or new
+PHP    : version 4.x or new
+MySQL  : version 4.x or new   (maybe 3.x, but not tested)
+Perl   : version 5.8.x or new (maybe 5.6.x, but not tested)
+cjpeg  : As part of jpeg-6b
+OS	  : Unix, Linux  - NOT tested on Windows servers. See "Notes on Windows server".
+Optional gnuplot: 3.7 +
 
-   To run Perl scripts you need this modules DBI and DBD::mysql. If you use DBD::mysqlPP
-   module you have to change scripts manually to mach this.
+Notes: 
+
+Be sure to have set on httpd.conf one of this options: "AllowOverride All" or
+"AllowOverride AuthConfig" so Apache can read .htaccess files to restrict access to
+certain folders. Also, you may need to set apache to know that .pl files are CGI
+scripts.  It can be done with "AddHandler cgi-script .pl" on a .htacces file.
+
+To run Perl scripts you need this modules DBI and DBD::mysql. If you use DBD::mysqlPP
+module you have to change scripts manually to mach this.
 
 
 
 # B - INSTALL
-#---------------------------------------------------------------------------------
+
 
 1. Clone this repository into a temporary place
 
 2. Create a database, a user for that database. Table definitions are in a file called
-   "new_tables.sql". Create the tables with a command like: 
-    (in example DB=badc user=lucy password=some_passwd)
-   There are some more table definifinion on files:
-   "votes_tbl.sql"
-   "badc_6_HL_slots.sql"
+"new_tables.sql". Create the tables with a command like: 
+(in example DB=badc user=lucy password=some_passwd)
+There are some more table definifinion on files:
+"votes_tbl.sql"
+"badc_6_HL_slots.sql"
 
 Example how to create databases from shell ($ is shell prompt)
 
@@ -74,86 +78,84 @@ $ mysql badc --user=lucy -psome_passwd < badc_6_HL_slots.sql
 
 If you do not have shell access just use some software like phpMyAdmin
 
-   **WARINIG**: any older tables from a running campaing will be droped!! This is to create
-   new tables only, for first time, or to reset all to 0. Pilot data, squadrons stats, all
-   will be lost if you run this on a running campaign.
-   
+**WARINIG**: any older tables from a running campaing will be droped!! This is to create
+new tables only, for first time, or to reset all to 0. Pilot data, squadrons stats, all
+will be lost if you run this on a running campaign.
+
 3. Place files as described in "Notes on Folder organization". Basically just copy all
-   files into your webroot folder. Set correct permissions: all .pl must be with exec
-   attributes (chmod a+x *.pl) allmost all txt files, log files, and campaing datas need
-   to have write attributes. Also write attributes on temporary folders.
+files into your webroot folder. Set correct permissions: all .pl must be with exec
+attributes (chmod a+x *.pl) allmost all txt files, log files, and campaing datas need
+to have write attributes. Also write attributes on temporary folders.
 
 
 4. Edit "config.pl" and "config.php" to match DB name, DB user and DB user password,
-   folder paths, program path and other values. There is a description on each value
-   inside config.pl file. 
+folder paths, program path and other values. There is a description on each value
+inside config.pl file. 
 
-   Edit other mission requeriments, like amount of total human players, amount of players
-   per side,  amount of missions per virtual day, dayly AF and city damage recover, damage
-   to AF per each pilot killed and for each plane lost, etc...
+Edit other mission requeriments, like amount of total human players, amount of players
+per side,  amount of missions per virtual day, dayly AF and city damage recover, damage
+to AF per each pilot killed and for each plane lost, etc...
 
 5. Load index.html and use you browser to check if all works ok. 
 
-   Note!! : Remember to set correct perl path on all .pl files
+Note!! : Remember to set correct perl path on all .pl files
 
-   Note!! : Make sure scripts are in correct newline format (used dos2unix util if need)
-            If you get script error can be because incorrect newlines translations
-            errors are "premature end of script headers"
+Note!! : Make sure scripts are in correct newline format (used dos2unix util if need)
+If you get script error can be because incorrect newlines translations
+errors are "premature end of script headers"
 
-   Register a pilot (you) with same name defined as super_user on config.pl
-   Load ref_map.html and run 2 scripts: make attack page, make front.
-   
-   Later register another pilots, 2 squadrons, go and make some mission, then try to report.
+Register a pilot (you) with same name defined as super_user on config.pl
+Load ref_map.html and run 2 scripts: make attack page, make front.
 
-      IMPORTANT: Before you can register a squadron you have to add authcodes into
-                 "claves.txt" Read more about this on "Notes on Authcodes".
-      IMPORTANT: Be sure to set correct host name on ref1 and ref2 values, if you do not
-      set this ok you will get an error on planning a mission " Incorrect HTTP_REFERER"
- 
-   Once you have all ready and like to start a campaign, you have to restore data files
-   (GEO_OBJ and FRONTLINE) because they are changed on all reports.
+Later register another pilots, 2 squadrons, go and make some mission, then try to report.
 
-   Customize your web site. Please do NOT use "Bellum" as campaign name. Bellum is the
-   first campaign runnin with this "BADC" (bourne again dinamic campaign). Set you desired
-   campaign name, change the rules as you like, customize languages, change sources to
-   introduce new fertures, build your style pages, and any customization you like.
+IMPORTANT: Before you can register a squadron you have to add authcodes into
+   "claves.txt" Read more about this on "Notes on Authcodes".
+IMPORTANT: Be sure to set correct host name on ref1 and ref2 values, if you do not
+set this ok you will get an error on planning a mission " Incorrect HTTP_REFERER"
 
-   
-   IMPORTANT: default pilot registration sets ban_plannig=0, that is you can make
-   requests. If you change (default to ban) you will nedd to set plannig rights to some
-   pilots, so they can make request. To do that, conect to mysql and run:
-      mysql>update bell_pilot_file set ban_planing=0;
-   This will give plannig to *all* registered pilots. To give only planing to one pilot do:
-      mysql>update bell_pilot_file set ban_planing=0 where hlname="PILOT_NAME";
+Once you have all ready and like to start a campaign, you have to restore data files
+(GEO_OBJ and FRONTLINE) because they are changed on all reports.
+
+Customize your web site. Please do NOT use "Bellum" as campaign name. Bellum is the
+first campaign runnin with this "BADC" (bourne again dinamic campaign). Set you desired
+campaign name, change the rules as you like, customize languages, change sources to
+introduce new fertures, build your style pages, and any customization you like.
 
 
-   When a map is over, go to config.pl, change config to use a new map, the go to
-   ref_map.html and run all 3 scripts to make map, front and suply images.
+IMPORTANT: default pilot registration sets ban_plannig=0, that is you can make
+requests. If you change (default to ban) you will nedd to set plannig rights to some
+pilots, so they can make request. To do that, conect to mysql and run:
+mysql>update bell_pilot_file set ban_planing=0;
+This will give plannig to *all* registered pilots. To give only planing to one pilot do:
+mysql>update bell_pilot_file set ban_planing=0 where hlname="PILOT_NAME";
 
-   In the DOCS folder you have a dump of FAQ and manual add ons from bellum forum.
-   understanting on how campaing works will help understand the code too.
 
-   The MAP_DATAS folder contains original data files. In case you like to restart a map,
-   here they are. Some of Those data files when are placed on CGI-BIN folder are changed
-   as campaigns run.
+When a map is over, go to config.pl, change config to use a new map, the go to
+ref_map.html and run all 3 scripts to make map, front and suply images.
+
+In the DOCS folder you have a dump of FAQ and manual add ons from bellum forum.
+understanting on how campaing works will help understand the code too.
+
+The MAP_DATAS folder contains original data files. In case you like to restart a map,
+here they are. Some of Those data files when are placed on CGI-BIN folder are changed
+as campaigns run.
 
 # C- NOTES
-#---------------------------------------------------------------------------------
 
+1)Notes on Windows server
 
-1) Notes on Windows server
- 
-   I really dont know if it can work or not. I made only a few test using Windows XP SP2 +
-   IndigoPerl +MySQL. Scripts works ok. But i didnt strong tested all programs. The only
-   modification needed is the path to perl on the first line of ALL .pl files:
+I really dont know if it can work or not. I made only a few test using Windows XP SP2 +
+IndigoPerl +MySQL. Scripts works ok. But i didnt strong tested all programs. The only
+modification needed is the path to perl on the first line of ALL .pl files:
 
-       If perl is on your path this will work:
-           #!perl
-       If not, place complete path to perl:
-          #!C:\path_to_perl\perl
+If perl is on your path this will work:
+#!perl
+If not, place complete path to perl:
+#!C:\path_to_perl\perl
 
-	  I can't say if there is a
-   gnuplot version for windows, and havent tested image convertions using cjpeg.exe
+I can't say if there is a
+gnuplot version for windows, and havent tested image convertions using cjpeg.exe
 
 You can get Mysql for windows here: http://dev.mysql.com/downloads/
 
@@ -166,19 +168,24 @@ config.pl looks different for windows server because windows uses backslash as f
 limiters, so an extra backslash is need to escape. Make sure paths do NOT contains spaces.
 If they do, you have to add escaped quotes. Take a look into config_windows.pl examples.
 
-2) Notes on Folder organization and Files description.
+2)Notes on Folder organization and Files description.
 
- There are some folder that are mandatory, becasue there is no option on config to
- change them. It is possible to do but you have to manually change all script and php
- files, or better, set them as variables and later place them on config.* files
- The mandatory folders layout are:
+There are some folder that are mandatory, becasue there is no option on config to
+change them. It is possible to do but you have to manually change all script and php
+files, or better, set them as variables and later place them on config.* files
+The mandatory folders layout are:
 
-Home                      
-\---public_html          Web root (html, php, css and other files)
-    |---gen              generated data files (control files, mis, properties)
-    |---images           general images dir
-    |---rep              html reports, reported missions zip files and eventlogs
-    \---tmp              temporary place for mission download
+Home
+
+\\---public_html          Web root (html, php, css and other files)
+
+|---gen              generated data files (control files, mis, properties)
+
+|---images           general images dir
+
+|---rep              html reports, reported missions zip files and eventlogs
+
+\\---tmp              temporary place for mission download
 
 Aditionally you can set up custom place for:
 cgi-bin folder   :    to hold scripts and campaing datafiles
@@ -188,27 +195,44 @@ data-backup folder :    to hold backup data
 This is the layout i use:
 
 Home                      
-\---public_html          Web root (html, php and other files)
-    |---cgi-bin          CgiExec dir (most perl and data files)
-    |   |---data_bkup    backups for data before reporting a mission
-    |   \---tmp          temp dir for cgi plots data files and upload missions
-    |---gen              generated data files (control files, mis, properties)
-    |---images           general images dir
-    |---rep              html reports, reported missins zip files and eventlogs
-    \---tmp              temporary place for mission download
+
+\\---public_html          Web root (html, php and other files)
+
+|---cgi-bin          CgiExec dir (most perl and data files)
+
+|   |---data_bkup    backups for data before reporting a mission
+
+|   \\---tmp          temp dir for cgi plots data files and upload missions
+
+|---gen              generated data files (control files, mis, properties)
+
+|---images           general images dir
+
+|---rep              html reports, reported missins zip files and eventlogs
+
+\\---tmp              temporary place for mission download
 
 Another layout:
 
 Home                      
+
 |---public_html          Web root (html, php and other files)
+
 |   |---gen              generated data files (control files, mis, properties)
+
 |   |---images           general images dir
+
 |   |---rep              html reports, reported missins zip files and eventlogs
-|   \---tmp              temporary place for mission download
+
+|   \\---tmp              temporary place for mission download
+
 |
-\---cgi-bin              CgiExec dir (most perl and data files)
-    |---data_bkup        bakups for data before reporting a mission
-    \---tmp              temp dir for cgi plots data files
+
+\\---cgi-bin              CgiExec dir (most perl and data files)
+
+|---data_bkup        bakups for data before reporting a mission
+
+\\---tmp              temp dir for cgi plots data files
 
 
 GENERAL HTML/PHP FILES
@@ -292,13 +316,13 @@ take_slot.pl        : take a slot from create.php -> take_slot.php
 test.pl		          : test instalation program
 write_comm.pl       : write comment on static html reports.
 
-3) Notes on Logfiles
+3)Notes on Logfiles
 
 There are several log files, 3 are the more important:
 - Gen_log.txt is the generator logfile. 
 - Par_log.txt is the parser logfile.
 - Pilot_log.txt is the logfile that holds all registration, pilot deletion, and other
-  pilot/sqds actions.
+pilot/sqds actions.
 
 Other logs are:
 clima_control.txt:  logfile with weather setup after a reported mission
@@ -322,7 +346,7 @@ manualy create those files in cgi-bin folder.
 mis_counter.data : holds mission number, format is underscore plus 5 digits. ex  _000001
 rep_counter.data : holds report number, format is underscore plus 5 digits. ex  _000001
 
-6) Notes on Authcodes
+6)Notes on Authcodes
 
 Authcodes are there to avoid massive squad registration. If you force to get an auth code,
 the interested has to register in forum. Many times people gets tired on register in a new
@@ -340,7 +364,7 @@ If you want to disable this, you can edit script to avoid verification, or you c
 single valid code, but stop writing it to used_claves.txt. This way you have a unique code
 (or many) that can be reused.
 
-7) Notes on mission creation.
+7)Notes on mission creation.
 
 Mission creation starts on create.php by taking a host slot, then both sides takes request
 slots, making each requests. Each request can be done, because take_slot.pl will display
@@ -377,7 +401,7 @@ rights and so on. But i never integrated all the request information on database
 just keep using old system with this 2 files. For sure, will be much better to include all
 data into host_slots_tbl DB and forget about those 2 files.
 
-8) Notes on images.  
+8)Notes on images.  
 
 All images i provide are made by me, or generous made by member comunity help on
 development. Some images are used with permission and other images not made by me are
@@ -399,7 +423,7 @@ images" this will set a cookie and images will be displayed. You later can click
 "disallow german images" to valid them, or just delete cookies. Because default action is
 not to display them.
 
-9) Notes on javascript
+9)Notes on javascript
 
 I use javascript on several places. Most of cases simple checks. But 2 cases need mention:
 
@@ -418,14 +442,16 @@ take out from parser. Also im not writing a replacement, so if you like to have 
 tool tip just go to dynamicdrive and het any tooltip you like, then change parser to
 generate reports using the javascript of your preference.
 You can find the place on parser (badc_par_1.pl) where the script was located and called:
-## REMOVED JAVASCRIPT TOOLTIP STYLE
-## REMOVED JAVASCRIPT TOOLTIP CODE
+
+      ## REMOVED JAVASCRIPT TOOLTIP STYLE
+      ## REMOVED JAVASCRIPT TOOLTIP CODE
+
 And how it was called: 
 #Points description used with JAVASCRIPT TOOLTIP  (if use comment pev line)
- 
+
 
 # D- CREDITS
-#---------------------------------------------------------------------------------
+
 
 
 OK, Lets go in order: :)
@@ -487,7 +513,7 @@ Other content is Copyright its respective owners.
 
 
 # E- LICENSE
-#---------------------------------------------------------------------------------
+
 
 
 BADC 1.0  - License
@@ -517,7 +543,7 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
 IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
 OF SUCH DAMAGE.
-		     END OF TERMS AND CONDITIONS
+END OF TERMS AND CONDITIONS
 
 
 Aditional NOTES
@@ -529,24 +555,24 @@ agree with this license.
 
 Case 2) You change sources, customize them, improve them, make bug fixes:
 
-    * 2.a) You keep your changes with exactly same Non-copileft licence: Replace
-        "JG10r_Dutertre" with your name or company name on above licence and replace
-        software name and version to the name you like different to "BADC 1.0".
+2.a) You keep your changes with exactly same Non-copileft licence: Replace
+"JG10r_Dutertre" with your name or company name on above licence and replace
+software name and version to the name you like different to "BADC 1.0".
 
-    * 2.b) You like to make your changes meet GNU licence: Usually this means you will add
-        the GNU licence (copyleft), and this avoid futher usage on binay only
-        distributions or comercial usage. Since this is in oposite to the initial licence,
-        you have to mention that parts of your release is based on Non-copyleft
-        license. This way people interested on use code for a binary/comercial
-        distribution can reach the original source to include in their proyect. To
-        acomplish this just place somewhere on your documentation that your code includes
-        Non-copyleft sources, and below that, include the initial licence, printed above.
+2.b) You like to make your changes meet GNU licence: Usually this means you will add
+the GNU licence (copyleft), and this avoid futher usage on binay only
+distributions or comercial usage. Since this is in oposite to the initial licence,
+you have to mention that parts of your release is based on Non-copyleft
+license. This way people interested on use code for a binary/comercial
+distribution can reach the original source to include in their proyect. To
+acomplish this just place somewhere on your documentation that your code includes
+Non-copyleft sources, and below that, include the initial licence, printed above.
 
-    * 2.c) You make a comercial or only binary use of this sources: Just mention the
-        copyright notice when you program runs, like is explained on licence. Because code
-        of comercial or binary only distributions are out public domain, you have to
-        mention that parts of your release is based on Non-copyleft license. This way
-        people interested on use code for other binary/comercial distribution or public
-        source distributions can reach the original source to include in their proyect. To
-        acomplish this just place somewhere on your documentation that your code includes
-        Non-copyleft sources, and below that, include the initial licence, printed above.
+2.c) You make a comercial or only binary use of this sources: Just mention the
+copyright notice when you program runs, like is explained on licence. Because code
+of comercial or binary only distributions are out public domain, you have to
+mention that parts of your release is based on Non-copyleft license. This way
+people interested on use code for other binary/comercial distribution or public
+source distributions can reach the original source to include in their proyect. To
+acomplish this just place somewhere on your documentation that your code includes
+Non-copyleft sources, and below that, include the initial licence, printed above.
